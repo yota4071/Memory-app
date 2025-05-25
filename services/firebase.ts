@@ -1,26 +1,21 @@
 // services/firebase.ts
-import {
-    FIREBASE_API_KEY,
-    FIREBASE_APP_ID,
-    FIREBASE_AUTH_DOMAIN,
-    FIREBASE_MESSAGING_SENDER_ID,
-    FIREBASE_PROJECT_ID,
-    FIREBASE_STORAGE_BUCKET
-} from '@env';
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: FIREBASE_API_KEY,
-  authDomain: FIREBASE_AUTH_DOMAIN,
-  projectId: FIREBASE_PROJECT_ID,
-  storageBucket: FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
-  appId: FIREBASE_APP_ID
+  apiKey: "AIzaSyCIdf8WkZ43JSMfY_OkGnrNNbwsaCGaWu8",
+  authDomain: "memory-app-a6921.firebaseapp.com",
+  projectId: "memory-app-a6921",
+  storageBucket: "memory-app-a6921.appspot.app.com",
+  messagingSenderId: "499101015937",
+  appId: "1:499101015937:web:d26875a4829e76a2fed280",
+  measurementId: "G-EK0GT63BPC"
 };
 
-// Firebaseを初期化
+// Firebase を初期化
 const app = initializeApp(firebaseConfig);
 
-// Firestoreデータベースを初期化してエクスポート
+// Firestore データベースを取得
 export const db = getFirestore(app);
+
+export default app;
