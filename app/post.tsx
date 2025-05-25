@@ -1,8 +1,10 @@
+// app/post.tsx として保存してください
+import { Stack } from 'expo-router';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { useLocation } from '../hooks/useLocation'; // GPS取得フック（作ってある前提）
-import { db } from '../services/firebase'; // Firebaseの接続先
+import { useLocation } from '../hooks/useLocation';
+import { db } from '../services/firebase';
 
 const feelings = ['😄', '😢', '😡', '😌', '😱', '😍'];
 
@@ -43,39 +45,47 @@ export default function PostScreen() {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>その場所の気持ちを記録しよう</Text>
-
-      <Text style={styles.label}>今の気持ちは？</Text>
-      <View style={styles.feelingsRow}>
-        {feelings.map((feeling) => (
-          <TouchableOpacity
-            key={feeling}
-            style={[
-              styles.feelingButton,
-              selectedFeeling === feeling && styles.selectedFeeling,
-            ]}
-            onPress={() => setSelectedFeeling(feeling)}
-          >
-            <Text style={styles.feelingText}>{feeling}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      <Text style={styles.label}>日記</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="思ったこと、感じたことを書いてみよう"
-        multiline
-        numberOfLines={6}
-        value={content}
-        onChangeText={setContent}
+    <>
+      <Stack.Screen 
+        options={{ 
+          title: '投稿',
+          headerShown: true 
+        }} 
       />
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.title}>その場所の気持ちを記録しよう</Text>
 
-    <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-     <Text style={styles.submitText}>この場所に投稿</Text>
-    </TouchableOpacity>
-    </ScrollView>
+        <Text style={styles.label}>今の気持ちは？</Text>
+        <View style={styles.feelingsRow}>
+          {feelings.map((feeling) => (
+            <TouchableOpacity
+              key={feeling}
+              style={[
+                styles.feelingButton,
+                selectedFeeling === feeling && styles.selectedFeeling,
+              ]}
+              onPress={() => setSelectedFeeling(feeling)}
+            >
+              <Text style={styles.feelingText}>{feeling}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        <Text style={styles.label}>日記</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="思ったこと、感じたことを書いてみよう"
+          multiline
+          numberOfLines={6}
+          value={content}
+          onChangeText={setContent}
+        />
+
+        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+          <Text style={styles.submitText}>この場所に投稿</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </>
   );
 }
 
